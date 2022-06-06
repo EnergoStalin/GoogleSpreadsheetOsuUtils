@@ -1,5 +1,5 @@
 {
 	"scriptId": "1DH7xAVFsLtGNXUAWge6y4hNvPsVw_X4ZIVny-X9zrriiY1sv8xczhU0G",
-	"rootDir": "./build",
+	"rootDir": "./src",
 	"fileExtension": "ts"
 }

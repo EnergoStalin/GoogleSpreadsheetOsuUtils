@@ -1,1 +1,1 @@
-const baseUrl = "https://osu.ppy.sh/api";
+const baseUrl = 'https://osu.ppy.sh/api';
