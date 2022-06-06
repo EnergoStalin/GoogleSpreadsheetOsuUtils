@@ -1,10 +1,11 @@
 {
 	"dependencies": {
-		"@types/google-apps-script": "^1.0.47"
+		"@types/google-apps-script": "^1.0.47",
+		"@types/web": "^0.0.67"
 	},
 	"scripts": {
 		"build": "tsc",
-		"deploy": "clasp push",
+		"deploy": "multi-clasp push --force",
 		"buildAndDeploy": "npm run build && npm run deploy",
 		"lint": "gts lint",
 		"clean": "gts clean",
@@ -16,7 +17,9 @@
 	},
 	"devDependencies": {
 		"@types/node": "^14.11.2",
+		"clasp": "^1.0.0",
 		"gts": "^3.1.0",
+		"multi-clasp2": "^3.0.3",
 		"typescript": "^4.0.3"
 	}
 }

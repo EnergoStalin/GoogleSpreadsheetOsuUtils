@@ -1,1 +1,2 @@
-const baseUrl = 'https://osu.ppy.sh/api';
+const BASEURL = 'https://osu.ppy.sh/api';
+const APIKEYPROPNAME = 'APIv1 key';
