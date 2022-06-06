@@ -1,0 +1,20 @@
+{
+  "timeZone": "Europe/Moscow",
+  "dependencies": {
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "addOns": {
+    "common": {
+      "name": "OsuFetch",
+      "logoUrl": "https://github.com/ppy/osu/raw/master/assets/lazer.png",
+      "layoutProperties": {
+        "primaryColor": "#727727"
+      },
+      "homepageTrigger": {}
+    },
+    "docs" : {},
+    "slides" : {},
+    "sheets" : {}
+  }
+}
