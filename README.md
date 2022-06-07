@@ -3,9 +3,14 @@
 ## Apps script
 Which add osu api functionality to your google sheets.
 
+# WIP
 ### Advantages
 - Request caching
 - All you need for tounaments
+
+### Current limitations
+- Supports only osu!standard api side
+- Sometimes hit rate limit error
 
 ### Functions
 - FetchOsuUserProperty

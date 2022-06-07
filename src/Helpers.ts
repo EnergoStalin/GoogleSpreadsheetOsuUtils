@@ -30,12 +30,20 @@ function setApiKey(val: string) {
 }
 
 /**
- * Perform json request to url, parse and returns first object in array
+ * Perform json request to url, parse and returns first object in array.
+ * Also logging api errors
  * @param {string} url
  * @return {any} json object
  */
 function jSONArrayRequestGetFirst(url: string) {
-	return JSON.parse(UrlFetchApp.fetch(url).getContentText('UTF8'))[0];
+	try {
+		const res = UrlFetchApp.fetch(url);
+		if(res.getResponseCode() !== 200)
+			throw `Peppy responded with code ${res.getResponseCode()} you baka. Responce body: ${res.getContentText()}`;
+		return JSON.parse(res.getContentText('UTF8'))[0];
+	} catch(e) {
+		Logger.log(`Api error: ${e}`)
+	}
 }
 
 /**

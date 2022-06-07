@@ -16,3 +16,67 @@ function FetchOsuUserProfileImage(name: string) {
 function FetchOsuUserProperty(name: string, property: string) {
 	return getUser(name)[property];
 }
+
+/**
+ * Shorthand for FetchOsuBeatmapProperty(url, 'cover_url')
+ * @param  {string} url
+ */
+function FetchOsuBeatmapCover(url: string) {
+	return FetchOsuBeatmapProperty(url, 'cover_url');
+}
+
+/**
+ * Shorthand for FetchOsuBeatmapProperty(url, 'thumb_url')
+ * @param  {string} url
+ */
+function FetchOsuBeatmapThumb(url: string) {
+	return FetchOsuBeatmapProperty(url, 'thumb_url');
+}
+
+/**
+ * Fetch beatmap from api and cache it
+ * @param  {string} url
+ * @param  {string} property
+ * @returns {string} property from api object
+ */
+function FetchOsuBeatmapProperty(url: string, property: string) {
+	return getBeatmap(url)[property];
+}
+
+/**
+ * Apply call on string and obtains object then return array with specified properties
+ * @param  {string} key
+ * @param  {string} properties list of props comma separated
+ * @returns {(a: string) => any} call prop getter
+ */
+function FetchOsuObjectProperties(key: string, properties: string, call: (a: string) => any) {
+	const bm = call(key);
+	const props = properties.split(',');
+
+	const data: any = [];
+	for(let k in props) {
+		data.push(bm[props[k]] || '')
+	}
+
+	return [data];
+}
+
+/**
+ * Fetch beatmap from api and cache it
+ * @param  {string} url
+ * @param  {string} property
+ * @returns {string} property from api object
+ */
+ function FetchOsuBeatmapProperties(url: string, properties: string) {
+	return FetchOsuObjectProperties(url, properties, getBeatmap);
+}
+
+/**
+ * Fetch beatmap from api and cache it
+ * @param  {string} url
+ * @param  {string} property
+ * @returns {string} property from api object
+ */
+ function FetchOsuUserProperties(url: string, properties: string) {
+	return FetchOsuObjectProperties(url, properties, getUser);
+}
