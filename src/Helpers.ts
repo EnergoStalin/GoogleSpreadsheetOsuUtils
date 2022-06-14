@@ -1,10 +1,17 @@
 /**
+ * Object consisting from string properties and string values
+ */
+interface SSO {
+	[key: string]: string;
+}
+
+/**
  * Transpose opts to url query
  * @param url baseUrl
  * @param opts opts to transpose
  * @returns result url
  */
-function applyOpts(url: string, opts: any) {
+function applyOpts(url: string, opts: SSO) {
 	for (const k in opts) {
 		url += `${!url.includes('?') ? '?' : '&'}${k}=${encodeURIComponent(
 			opts[k]
@@ -15,7 +22,7 @@ function applyOpts(url: string, opts: any) {
 
 /**
  * Get api key from document store
- * @returns {string | null} apiKey form store or null
+ * @returns {string?} apiKey form store or null
  */
 function getApiKey() {
 	return PropertiesService.getDocumentProperties().getProperty(APIKEYPROPNAME);
@@ -33,16 +40,16 @@ function setApiKey(val: string) {
  * Perform json request to url, parse and returns first object in array.
  * Also logging api errors
  * @param {string} url
- * @return {any} json object
+ * @return {SSO} json object
  */
 function jSONArrayRequestGetFirst(url: string) {
 	try {
 		const res = UrlFetchApp.fetch(url);
-		if(res.getResponseCode() !== 200)
+		if (res.getResponseCode() !== 200)
 			throw `Peppy responded with code ${res.getResponseCode()} you baka. Responce body: ${res.getContentText()}`;
 		return JSON.parse(res.getContentText('UTF8'))[0];
-	} catch(e) {
-		Logger.log(`Api error: ${e}`)
+	} catch (e) {
+		Logger.log(`Api error: ${e}`);
 	}
 }
 
@@ -56,7 +63,7 @@ function checkApiKey(key: string) {
 			applyOpts(BASEURL + '/get_user', {
 				k: key,
 				type: 'id',
-				u: 2,
+				u: '2',
 			})
 		);
 
@@ -68,12 +75,12 @@ function checkApiKey(key: string) {
 
 /**
  * Patch opts with api key
- * @param {any} opts for query
- * @returns {any} opts patched with api key
+ * @param {SSO} opts for query
+ * @returns {SSO} opts patched with api key
  */
-function addApiKey(opts: any) {
+function addApiKey(opts: SSO) {
 	return {
 		...opts,
-		k: getApiKey(),
+		k: getApiKey() as string,
 	};
 }

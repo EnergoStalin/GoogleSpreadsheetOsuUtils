@@ -47,15 +47,19 @@ function FetchOsuBeatmapProperty(url: string, property: string) {
  * Apply call on string and obtains object then return array with specified properties
  * @param  {string} key
  * @param  {string} properties list of props comma separated
- * @returns {(a: string) => any} call prop getter
+ * @returns {(a: string) => SSO} call prop getter
  */
-function FetchOsuObjectProperties(key: string, properties: string, call: (a: string) => any) {
+function FetchOsuObjectProperties(
+	key: string,
+	properties: string,
+	call: (a: string) => SSO
+) {
 	const bm = call(key);
 	const props = properties.split(',');
 
-	const data: any = [];
-	for(let k in props) {
-		data.push(bm[props[k]] || '')
+	const data: string[] = [];
+	for (const k in props) {
+		data.push(bm[props[k]] || '');
 	}
 
 	return [data];
@@ -67,7 +71,7 @@ function FetchOsuObjectProperties(key: string, properties: string, call: (a: str
  * @param  {string} property
  * @returns {string} property from api object
  */
- function FetchOsuBeatmapProperties(url: string, properties: string) {
+function FetchOsuBeatmapProperties(url: string, properties: string) {
 	return FetchOsuObjectProperties(url, properties, getBeatmap);
 }
 
@@ -77,6 +81,6 @@ function FetchOsuObjectProperties(key: string, properties: string, call: (a: str
  * @param  {string} property
  * @returns {string} property from api object
  */
- function FetchOsuUserProperties(url: string, properties: string) {
+function FetchOsuUserProperties(url: string, properties: string) {
 	return FetchOsuObjectProperties(url, properties, getUser);
 }

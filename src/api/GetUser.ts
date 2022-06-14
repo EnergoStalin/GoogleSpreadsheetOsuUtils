@@ -8,7 +8,7 @@ function getUser(name: string) {
 	const json = CacheService.getDocumentCache()!.get(cacheKey);
 	if (json !== null) {
 		const obj = JSON.parse(json);
-		if(obj !== undefined) {
+		if (obj !== undefined) {
 			return obj;
 		}
 	}
@@ -18,7 +18,7 @@ function getUser(name: string) {
 			BASEURL + '/get_user',
 			addApiKey({
 				u: name,
-				m: 0
+				m: '0',
 			})
 		)
 	);
