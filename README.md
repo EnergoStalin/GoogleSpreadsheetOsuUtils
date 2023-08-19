@@ -1,7 +1,9 @@
 # OsuUtils
 [![clasp](https://img.shields.io/badge/built%20with-clasp-4285f4.svg)](https://github.com/google/clasp)
-## Apps script
+
 Adding some osu api functionality to your google spreadsheets.
+
+### :warning: Before using set apiKey in Peppy console tab
 
 ### Advantages
 - Request caching with configurable expiry time
