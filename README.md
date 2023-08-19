@@ -19,4 +19,4 @@ Adding some osu api functionality to your google spreadsheets.
 - FetchOsuBeatmapProperties
 - FetchOsuUserProperties
 
-> Details [here](https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils/blob/main/src/Bindings.ts)
+> Details [here](https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils/blob/master/src/Bindings.ts)
