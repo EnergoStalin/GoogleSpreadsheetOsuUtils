@@ -1,7 +1,10 @@
 on:
   push:
-    branches:
-      - master
+    paths:
+      - 'src/**'
+
+concurrency: ci-${{ github.ref }}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
