@@ -8,7 +8,7 @@ function FetchOsuUserProfileImage(name: string) {
 }
 
 /**
- * Fetch user from api and cache it
+ * Fetch user from api
  * @param name user to fetch
  * @param property property to return
  * @returns user[property]
@@ -44,7 +44,7 @@ function FetchOsuBeatmapThumb(url: string) {
 }
 
 /**
- * Fetch beatmap from api and cache it
+ * Fetch beatmap from api
  * @param  {string} url
  * @param  {string} property
  * @returns {string} property from api object
@@ -76,7 +76,7 @@ function FetchOsuObjectProperties(
 }
 
 /**
- * Fetch beatmap from api and cache it
+ * Fetch beatmap from api
  * @param  {string} url
  * @param  {string} property
  * @returns {string} property from api object
@@ -86,7 +86,7 @@ function FetchOsuBeatmapProperties(url: string, properties: string) {
 }
 
 /**
- * Fetch beatmap from api and cache it
+ * Fetch beatmap from api
  * @param  {string} url
  * @param  {string} property
  * @returns {string} property from api object
