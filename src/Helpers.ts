@@ -21,22 +21,6 @@ function applyOpts(url: string, opts: SSO) {
 }
 
 /**
- * Get api key from document store
- * @returns {string?} apiKey form store or null
- */
-function getApiKey() {
-	return Config.apiKey;
-}
-
-/**
- * Store apiKey to document store
- * @param {string} val key to store
- */
-function setApiKey(val: string) {
-	Config.apiKey = val;
-}
-
-/**
  * Perform json request to url, parse and returns first object in array.
  * Also logging api errors
  * @param {string} url
@@ -85,6 +69,6 @@ function checkApiKey(key: string) {
 function addApiKey(opts: SSO) {
 	return {
 		...opts,
-		k: getApiKey() as string,
+		k: Config.apiKey,
 	};
 }
