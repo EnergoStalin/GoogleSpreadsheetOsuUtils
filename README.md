@@ -3,15 +3,13 @@
 
 Adding some osu api functionality to your google spreadsheets.
 
-### :warning: Before using set apiKey in Peppy console tab
+### :warning: Before using any api functionality set apiKey in Peppy console tab
 
 ### Limitations
 - Supports only osu!standard api side
-- Sometimes hit rate limit error when refreshing many functions at once (cant be fixed due to spreadsheet and current architercture limitations)
 
 ### Functions 
 - FetchOsuUserProperty
-- FetchOsuUserImage
 - FetchOsuUserProfileImage
 - FetchOsuUserPP
 - FetchOsuBeatmapCover

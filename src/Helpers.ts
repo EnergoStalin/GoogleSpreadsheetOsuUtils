@@ -25,7 +25,7 @@ function applyOpts(url: string, opts: SSO) {
  * @returns {string?} apiKey form store or null
  */
 function getApiKey() {
-	return PropertiesService.getDocumentProperties().getProperty(APIKEYPROPNAME);
+  return Config.apiKey;
 }
 
 /**
@@ -33,7 +33,7 @@ function getApiKey() {
  * @param {string} val key to store
  */
 function setApiKey(val: string) {
-	PropertiesService.getDocumentProperties().setProperty(APIKEYPROPNAME, val);
+  Config.apiKey = val;
 }
 
 /**
@@ -60,7 +60,7 @@ function jSONArrayRequestGetFirst(url: string) {
 function checkApiKey(key: string) {
 	try {
 		jSONArrayRequestGetFirst(
-			applyOpts(BASEURL + '/get_user', {
+			applyOpts(Config.baseUrl + '/get_user', {
 				k: key,
 				type: 'id',
 				u: '2',

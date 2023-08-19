@@ -9,6 +9,10 @@ function onOpen() {
 				.addItem('Set API key', 'showKeyStoringPrompt')
 				.addItem('Remove API key', 'removeKeyStoringPrompt')
 		)
+    .addSubMenu(
+			UI.createMenu('Cache')
+				.addItem('Expiry time', 'setCacheExpiryTime')
+		)
 		.addToUi();
 }
 
@@ -19,7 +23,7 @@ function showKeyStoringPrompt() {
 	const UI = SpreadsheetApp.getUi();
 	const doc = PropertiesService.getDocumentProperties();
 
-	if (doc.getProperty('APIv1 key') !== null)
+	if (Config.apiKey !== '')
 		if (
 			UI.alert(
 				'An API key already exists, do you want to overwrite it?',
@@ -30,7 +34,7 @@ function showKeyStoringPrompt() {
 
 	// Prompt for api key
 	const res = UI.prompt(
-		"Please enter your osu! APIv1 key (create one using http://osu.ppy.sh/p/api if you don't have it)",
+		'Please enter your osu! APIv1 key (create one using http://osu.ppy.sh/p/api if you don\'t have it)',
 		'Please enter your API key:',
 		UI.ButtonSet.OK_CANCEL
 	);
@@ -40,7 +44,7 @@ function showKeyStoringPrompt() {
 	const apiKey = res.getResponseText();
 
 	if (checkApiKey(apiKey)) {
-		doc.setProperty('APIv1 key', apiKey);
+    Config.apiKey = apiKey;
 		UI.alert(
 			'Your API key is working correctly and has been stored for use in this spreadsheet.'
 		);
@@ -66,6 +70,19 @@ function removeKeyStoringPrompt() {
 	)
 		return;
 
-	doc.deleteProperty(APIKEYPROPNAME);
+	Config.apiKey = '';
 	UI.alert('The key has been removed successfully.');
+}
+
+function setCacheExpiryTime() {
+  const UI = SpreadsheetApp.getUi();
+  const res = UI.prompt(
+		'Expiry time',
+		'Expiry time in secpnds:',
+		UI.ButtonSet.OK_CANCEL
+	);
+
+	// If cancelled return
+	if (res.getSelectedButton() !== UI.Button.OK) return;
+	Config.cacheTime = res.getResponseText();
 }
