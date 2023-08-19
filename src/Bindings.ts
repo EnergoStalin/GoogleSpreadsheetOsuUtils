@@ -1,10 +1,10 @@
 /**
- * Shorthand for FetchOsuUserProperty(name, 'avatar_url')
+ * Shorthand for FetchOsuUserProperty(name, 'cover_url')
  * @param name
  * @returns avatar url
  */
 function FetchOsuUserProfileImage(name: string) {
-	return FetchOsuUserProperty(name, 'avatar_url');
+	return FetchOsuUserProperty(name, 'cover_url');
 }
 
 /**
@@ -15,6 +15,16 @@ function FetchOsuUserProfileImage(name: string) {
  */
 function FetchOsuUserProperty(name: string, property: string) {
 	return getUser(name)[property];
+}
+
+/**
+ * Shorthand for FetchOsuUserProperty(name, 'pp_raw')
+ * @param name user to fetch
+ * @param property property to return
+ * @returns user[property]
+ */
+function FetchOsuUserPP(name: string) {
+	return FetchOsuUserProperty(name, 'pp_raw');
 }
 
 /**
