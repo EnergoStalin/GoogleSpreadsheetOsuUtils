@@ -24,7 +24,7 @@ function getUser(name: string) {
 	);
 
 	user['cover_url'] = `http://s.ppy.sh/a/${user['user_id']}`;
-	CacheService.getDocumentCache()!.put(cacheKey, JSON.stringify(user), 604800);
+	CacheService.getDocumentCache()!.put(cacheKey, JSON.stringify(user), parseInt(PropertiesService.getDocumentProperties().getProperty(STORE_CACHE) ?? `${DEFAULT_CACHE_TIME}`, 10));
 
 	return user;
 }

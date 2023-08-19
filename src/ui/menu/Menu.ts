@@ -6,9 +6,13 @@ function onOpen() {
 	UI.createMenu('Peppy console')
 		.addSubMenu(
 			UI.createMenu('osu!API Management')
-				.addItem('Add API key', 'showKeyStoringPrompt')
+				.addItem('Set API key', 'showKeyStoringPrompt')
 				.addItem('Remove API key', 'removeKeyStoringPrompt')
 		)
+    .addSubMenu(
+      UI.createMenu('Cache')
+        .addItem('Expiry time', 'setCacheExpiryTime')
+    )
 		.addToUi();
 }
 
@@ -68,4 +72,24 @@ function removeKeyStoringPrompt() {
 
 	doc.deleteProperty(APIKEYPROPNAME);
 	UI.alert('The key has been removed successfully.');
+}
+
+/**
+ * Prompt & removing api key from storage
+ */
+function setCacheExpiryTime() {
+	const UI = SpreadsheetApp.getUi();
+	const doc = PropertiesService.getDocumentProperties();
+
+	const res = UI.prompt(
+		`Expiration time deafault ${DEFAULT_CACHE_TIME}`,
+		'Expiration time in seconds:',
+		UI.ButtonSet.OK_CANCEL
+	);
+
+  // If cancelled return
+	if (res.getSelectedButton() !== UI.Button.OK) return;
+	const expiry = res.getResponseText();
+
+  doc.setProperty(STORE_CACHE, expiry)
 }
