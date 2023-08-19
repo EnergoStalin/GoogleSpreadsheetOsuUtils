@@ -8,7 +8,7 @@ function getUser(name: string) {
 
 	try {
 		lock.tryLock(30000);
-		return _getUser(name);
+		return Config.enableCaching ? _getUserCached(name) : _getUser(name);
 	} finally {
 		lock.releaseLock();
 	}
@@ -19,7 +19,7 @@ function _getUserCached(name: string) {
 	const cacheKey = `u/${name}`;
 
 	const json = cache.get(cacheKey);
-	if (json) {
+	if (!!json) {
 		const obj = JSON.parse(json);
 		if (obj) {
 			return obj;

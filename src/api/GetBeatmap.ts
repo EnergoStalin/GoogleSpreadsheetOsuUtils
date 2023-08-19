@@ -8,7 +8,7 @@ function getBeatmap(url: string) {
 
 	try {
 		lock.tryLock(30000);
-		return _getBeatmapCached(url);
+		return Config.enableCaching ? _getBeatmapCached(url) : _getBeatmap(_parseBeatmapUrl(url));
 	} finally {
 		lock.releaseLock();
 	}
@@ -31,7 +31,7 @@ function _getBeatmapCached(url: string) {
 	const data = _parseBeatmapUrl(url);
 
 	const json = cache.get(data.cacheKey);
-	if (json) {
+	if (!!json) {
 		const obj = JSON.parse(json);
 		if (obj) {
 			return obj;
@@ -39,18 +39,18 @@ function _getBeatmapCached(url: string) {
 	}
 
 	cache.remove(data.cacheKey);
-	const beatmap = _getBeatmap(data.bmid, data.bmsid);
+	const beatmap = _getBeatmap(data);
 	cache.put(data.cacheKey, JSON.stringify(beatmap));
 
 	return beatmap;
 }
 
-function _getBeatmap(bmid: string, bmsid: string) {
+function _getBeatmap(data: {bmid: string, bmsid: string}) {
 	const beatmap = jSONArrayRequestGetFirst(
 		applyOpts(
 			Config.baseUrl + '/get_beatmaps',
 			addApiKey({
-				b: bmid,
+				b: data.bmid,
 				m: '0',
 				limit: '1',
 			})
@@ -60,8 +60,8 @@ function _getBeatmap(bmid: string, bmsid: string) {
 
 	beatmap[
 		'cover_url'
-	] = `https://assets.ppy.sh/beatmaps/${bmsid}/covers/cover.jpg`;
-	beatmap['thumb_url'] = `https://b.ppy.sh/thumb/${bmsid}l.jpg`;
+	] = `https://assets.ppy.sh/beatmaps/${data.bmsid}/covers/cover.jpg`;
+	beatmap['thumb_url'] = `https://b.ppy.sh/thumb/${data.bmsid}l.jpg`;
 
 	return beatmap;
 }

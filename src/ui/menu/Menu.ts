@@ -10,7 +10,9 @@ function onOpen() {
 				.addItem('Remove API key', 'removeKeyStoringPrompt')
 		)
 		.addSubMenu(
-			UI.createMenu('Cache').addItem('Expiry time', 'setCacheExpiryTime')
+			UI.createMenu('Cache')
+        .addItem('Expiry time', 'setCacheExpiryTime')
+        .addItem('Use cache?', 'setEnableCache')
 		)
 		.addToUi();
 }
@@ -20,7 +22,6 @@ function onOpen() {
  */
 function showKeyStoringPrompt() {
 	const UI = SpreadsheetApp.getUi();
-	const doc = PropertiesService.getDocumentProperties();
 
 	if (Config.apiKey !== '')
 		if (
@@ -59,7 +60,6 @@ function showKeyStoringPrompt() {
  */
 function removeKeyStoringPrompt() {
 	const UI = SpreadsheetApp.getUi();
-	const doc = PropertiesService.getDocumentProperties();
 
 	if (
 		UI.alert(
@@ -84,4 +84,17 @@ function setCacheExpiryTime() {
 	// If cancelled return
 	if (res.getSelectedButton() !== UI.Button.OK) return;
 	Config.cacheTime = res.getResponseText();
+}
+
+function setEnableCache() {
+	const UI = SpreadsheetApp.getUi();
+	const res = UI.prompt(
+		'Enable cache?',
+		'Ok to enable Cancel to disable',
+		UI.ButtonSet.OK_CANCEL
+	);
+
+	// If cancelled return
+	if (res.getSelectedButton() !== UI.Button.OK) Config.enableCaching = false;
+  else Config.enableCaching = true;
 }
