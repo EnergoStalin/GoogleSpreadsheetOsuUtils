@@ -25,7 +25,7 @@ function applyOpts(url: string, opts: SSO) {
  * @returns {string?} apiKey form store or null
  */
 function getApiKey() {
-  return Config.apiKey;
+	return Config.apiKey;
 }
 
 /**
@@ -33,7 +33,7 @@ function getApiKey() {
  * @param {string} val key to store
  */
 function setApiKey(val: string) {
-  Config.apiKey = val;
+	Config.apiKey = val;
 }
 
 /**

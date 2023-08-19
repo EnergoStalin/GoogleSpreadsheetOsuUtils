@@ -4,32 +4,32 @@
  * @returns js object patched with some custom properties
  */
 function getUser(name: string) {
-  const lock = LockService.getDocumentLock()!;
+	const lock = LockService.getDocumentLock()!;
 
-  try {
-    lock.tryLock(30000);
-    return _getUser(name);
-  } finally {
-    lock.releaseLock();
-  }
+	try {
+		lock.tryLock(30000);
+		return _getUser(name);
+	} finally {
+		lock.releaseLock();
+	}
 }
 
 function _getUserCached(name: string) {
-  const cache = CacheService.getDocumentCache()!;
-  const cacheKey = `u/${name}`;
+	const cache = CacheService.getDocumentCache()!;
+	const cacheKey = `u/${name}`;
 
-  const json = cache.get(cacheKey);
-  if (json) {
-    const obj = JSON.parse(json);
-    if (obj) {
-      return obj;
-    }
-  }
+	const json = cache.get(cacheKey);
+	if (json) {
+		const obj = JSON.parse(json);
+		if (obj) {
+			return obj;
+		}
+	}
 
-  const user = _getUser(name);
-  cache.put(cacheKey, JSON.stringify(user));
+	const user = _getUser(name);
+	cache.put(cacheKey, JSON.stringify(user));
 
-  return user;
+	return user;
 }
 
 function _getUser(name: string) {

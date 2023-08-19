@@ -9,9 +9,8 @@ function onOpen() {
 				.addItem('Set API key', 'showKeyStoringPrompt')
 				.addItem('Remove API key', 'removeKeyStoringPrompt')
 		)
-    .addSubMenu(
-			UI.createMenu('Cache')
-				.addItem('Expiry time', 'setCacheExpiryTime')
+		.addSubMenu(
+			UI.createMenu('Cache').addItem('Expiry time', 'setCacheExpiryTime')
 		)
 		.addToUi();
 }
@@ -34,7 +33,7 @@ function showKeyStoringPrompt() {
 
 	// Prompt for api key
 	const res = UI.prompt(
-		'Please enter your osu! APIv1 key (create one using http://osu.ppy.sh/p/api if you don\'t have it)',
+		"Please enter your osu! APIv1 key (create one using http://osu.ppy.sh/p/api if you don't have it)",
 		'Please enter your API key:',
 		UI.ButtonSet.OK_CANCEL
 	);
@@ -44,7 +43,7 @@ function showKeyStoringPrompt() {
 	const apiKey = res.getResponseText();
 
 	if (checkApiKey(apiKey)) {
-    Config.apiKey = apiKey;
+		Config.apiKey = apiKey;
 		UI.alert(
 			'Your API key is working correctly and has been stored for use in this spreadsheet.'
 		);
@@ -75,8 +74,8 @@ function removeKeyStoringPrompt() {
 }
 
 function setCacheExpiryTime() {
-  const UI = SpreadsheetApp.getUi();
-  const res = UI.prompt(
+	const UI = SpreadsheetApp.getUi();
+	const res = UI.prompt(
 		'Expiry time',
 		'Expiry time in secpnds:',
 		UI.ButtonSet.OK_CANCEL
