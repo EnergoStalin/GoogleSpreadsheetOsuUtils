@@ -4,15 +4,6 @@
  * @returns js object patched with some custom properties
  */
 function getUser(name: string) {
-	const cacheKey = `u/${name}`;
-	const json = CacheService.getDocumentCache()!.get(cacheKey);
-	if (json !== null) {
-		const obj = JSON.parse(json);
-		if (obj !== undefined) {
-			return obj;
-		}
-	}
-
 	const user = jSONArrayRequestGetFirst(
 		applyOpts(
 			BASEURL + '/get_user',
@@ -24,7 +15,6 @@ function getUser(name: string) {
 	);
 
 	user['cover_url'] = `http://s.ppy.sh/a/${user['user_id']}`;
-	CacheService.getDocumentCache()!.put(cacheKey, JSON.stringify(user), parseInt(PropertiesService.getDocumentProperties().getProperty(STORE_CACHE) ?? `${DEFAULT_CACHE_TIME}`, 10));
 
 	return user;
 }
