@@ -11,8 +11,8 @@ function onOpen() {
 		)
 		.addSubMenu(
 			UI.createMenu('Cache')
-        .addItem('Expiry time', 'setCacheExpiryTime')
-        .addItem('Use cache?', 'setEnableCache')
+				.addItem('Expiry time', 'setCacheExpiryTime')
+				.addItem('Use cache?', 'setEnableCache')
 		)
 		.addToUi();
 }
@@ -96,5 +96,5 @@ function setEnableCache() {
 
 	// If cancelled return
 	if (res.getSelectedButton() !== UI.Button.OK) Config.enableCaching = false;
-  else Config.enableCaching = true;
+	else Config.enableCaching = true;
 }

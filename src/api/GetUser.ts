@@ -19,7 +19,7 @@ function _getUserCached(name: string) {
 	const cacheKey = `u/${name}`;
 
 	const json = cache.get(cacheKey);
-	if (!!json) {
+	if (json) {
 		const obj = JSON.parse(json);
 		if (obj) {
 			return obj;

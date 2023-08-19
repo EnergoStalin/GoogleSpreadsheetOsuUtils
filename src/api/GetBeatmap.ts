@@ -8,7 +8,9 @@ function getBeatmap(url: string) {
 
 	try {
 		lock.tryLock(30000);
-		return Config.enableCaching ? _getBeatmapCached(url) : _getBeatmap(_parseBeatmapUrl(url));
+		return Config.enableCaching
+			? _getBeatmapCached(url)
+			: _getBeatmap(_parseBeatmapUrl(url));
 	} finally {
 		lock.releaseLock();
 	}
@@ -31,7 +33,7 @@ function _getBeatmapCached(url: string) {
 	const data = _parseBeatmapUrl(url);
 
 	const json = cache.get(data.cacheKey);
-	if (!!json) {
+	if (json) {
 		const obj = JSON.parse(json);
 		if (obj) {
 			return obj;
@@ -45,7 +47,7 @@ function _getBeatmapCached(url: string) {
 	return beatmap;
 }
 
-function _getBeatmap(data: {bmid: string, bmsid: string}) {
+function _getBeatmap(data: {bmid: string; bmsid: string}) {
 	const beatmap = jSONArrayRequestGetFirst(
 		applyOpts(
 			Config.baseUrl + '/get_beatmaps',

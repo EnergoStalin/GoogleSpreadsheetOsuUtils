@@ -47,11 +47,11 @@ function jSONArrayRequestGetFirst(url: string) {
 		const res = UrlFetchApp.fetch(url);
 		if (res.getResponseCode() !== 200)
 			throw `Peppy responded with code ${res.getResponseCode()} you baka. Responce body: ${res.getContentText()}`;
-    const text = res.getContentText('UTF8');
-    const json = JSON.parse(text)[0];
-    if(!!json) return json;
+		const text = res.getContentText('UTF8');
+		const json = JSON.parse(text)[0];
+		if (json) return json;
 
-    throw `${url} ${text} ${json}`;
+		throw `${url} ${text} ${json}`;
 	} catch (e) {
 		Logger.log(`Api error: ${e}`);
 	}
