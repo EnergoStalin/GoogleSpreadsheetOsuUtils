@@ -1,17 +1,25 @@
 # OsuUtils
 [![clasp](https://img.shields.io/badge/built%20with-clasp-4285f4.svg)](https://github.com/google/clasp)
 ## Apps script
-Which add osu api functionality to your google sheets.
+Adding some osu api functionality to your google spreadsheets.
 
-# WIP
 ### Advantages
-- Request caching
-- All you need for tounaments
+- Request caching with configurable expiry time
 
-### Current limitations
+### Limitations
 - Supports only osu!standard api side
-- Sometimes hit rate limit error
+- Sometimes hit rate limit error when refreshing many functions at once (cant be fixed due to spreadsheet and current architercture limitations)
 
-### Functions
+### Functions 
 - FetchOsuUserProperty
-- FetchOsuUserImage (Shorthand for obtaining )
+- FetchOsuUserImage
+- FetchOsuUserProfileImage
+- FetchOsuUserPP
+- FetchOsuBeatmapCover
+- FetchOsuBeatmapThumb
+- FetchOsuBeatmapProperty
+- FetchOsuObjectProperties
+- FetchOsuBeatmapProperties
+- FetchOsuUserProperties
+
+> Details [here](https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils/blob/main/src/Bindings.ts)
