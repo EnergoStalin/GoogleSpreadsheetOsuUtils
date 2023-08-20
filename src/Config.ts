@@ -21,7 +21,7 @@ class Config {
 		return (Config.properties.getProperty('enableCaching') ?? '0') === '1';
 	}
 	static set enableCaching(value: boolean) {
-		Config.setPropertyOrDeleteIfNull('cacheTime', value ? '1' : '0');
+		Config.setPropertyOrDeleteIfNull('enableCaching', value ? '1' : '0');
 	}
 
 	private static setPropertyOrDeleteIfNull(key: string, val: string) {

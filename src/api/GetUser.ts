@@ -7,7 +7,7 @@ function getUser(name: string) {
 	const lock = LockService.getDocumentLock()!;
 
 	try {
-		lock.tryLock(30000);
+		lock.waitLock(300000);
 		return Config.enableCaching ? _getUserCached(name) : _getUser(name);
 	} finally {
 		lock.releaseLock();
@@ -22,6 +22,7 @@ function _getUserCached(name: string) {
 	if (json) {
 		const obj = JSON.parse(json);
 		if (obj) {
+      Logger.log(`Got cached result: ${cacheKey}`);
 			return obj;
 		}
 	}
@@ -44,6 +45,8 @@ function _getUser(name: string) {
 	);
 
 	user['cover_url'] = `http://s.ppy.sh/a/${user['user_id']}`;
+
+  Logger.log(`Fetched from api: ${name}`);
 
 	return user;
 }
