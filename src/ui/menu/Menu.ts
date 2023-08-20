@@ -85,7 +85,7 @@ function setCacheExpiryTime() {
 	if (res.getSelectedButton() !== UI.Button.OK) return;
 	Config.cacheTime = res.getResponseText();
 
-  Logger.log(`Cache time set to ${Config.cacheTime}`);
+	Logger.log(`Cache time set to ${Config.cacheTime}`);
 }
 
 function setEnableCache() {
@@ -99,5 +99,5 @@ function setEnableCache() {
 	// If cancelled return
 	Config.enableCaching = res.getSelectedButton() === UI.Button.OK;
 
-  Logger.log(`Cache set to ${Config.enableCaching}`);
+	Logger.log(`Cache set to ${Config.enableCaching}`);
 }

@@ -49,7 +49,7 @@ function _getBeatmapCached(url: string) {
 	return beatmap;
 }
 
-function _getBeatmap(data: {bmid: string; bmsid: string, cacheKey: string}) {
+function _getBeatmap(data: {bmid: string; bmsid: string; cacheKey: string}) {
 	const beatmap = jSONArrayRequestGetFirst(
 		applyOpts(
 			Config.baseUrl + '/get_beatmaps',

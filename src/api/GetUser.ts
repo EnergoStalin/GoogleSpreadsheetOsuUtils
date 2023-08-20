@@ -22,7 +22,7 @@ function _getUserCached(name: string) {
 	if (json) {
 		const obj = JSON.parse(json);
 		if (obj) {
-      Logger.log(`Got cached result: ${cacheKey}`);
+			Logger.log(`Got cached result: ${cacheKey}`);
 			return obj;
 		}
 	}
@@ -46,7 +46,7 @@ function _getUser(name: string) {
 
 	user['cover_url'] = `http://s.ppy.sh/a/${user['user_id']}`;
 
-  Logger.log(`Fetched from api: ${name}`);
+	Logger.log(`Fetched from api: ${name}`);
 
 	return user;
 }
