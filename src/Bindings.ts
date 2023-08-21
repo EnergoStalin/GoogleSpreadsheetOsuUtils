@@ -28,33 +28,33 @@ function FetchOsuUserPP(name: string) {
 }
 
 /**
- * Shorthand for FetchOsuBeatmapProperty(url, 'cover_url')
- * @param  {string} url
+ * Shorthand for FetchOsuBeatmapProperty(identifier, 'cover_url')
+ * @param  {string} identifier
  */
-function FetchOsuBeatmapCover(url: string) {
-	return FetchOsuBeatmapProperty(url, 'cover_url');
+function FetchOsuBeatmapCover(identifier: string) {
+	return FetchOsuBeatmapProperty(identifier, 'cover_url');
 }
 
 /**
- * Shorthand for FetchOsuBeatmapProperty(url, 'thumb_url')
- * @param  {string} url
+ * Shorthand for FetchOsuBeatmapProperty(identifier, 'thumb_url')
+ * @param  {string} identifier
  */
-function FetchOsuBeatmapThumb(url: string) {
-	return FetchOsuBeatmapProperty(url, 'thumb_url');
+function FetchOsuBeatmapThumb(identifier: string) {
+	return FetchOsuBeatmapProperty(identifier, 'thumb_url');
 }
 
 /**
- * Fetch beatmap from api
- * @param  {string} url
+ * Fetch beatmap from api and return single property from it
+ * @param  {string} identifier can be url or bmid
  * @param  {string} property
  * @returns {string} property from api object
  */
-function FetchOsuBeatmapProperty(url: string, property: string) {
-	return getBeatmap(url)[property];
+function FetchOsuBeatmapProperty(identifier: string, property: string) {
+	return getBeatmap(identifier)[property];
 }
 
 /**
- * Apply call on string and obtains object then return array with specified properties
+ * Apply call on key and obtains properties from it returning it's array
  * @param  {string} key
  * @param  {string} properties list of props comma separated
  * @returns {(a: string) => SSO} call prop getter
@@ -76,21 +76,21 @@ function FetchOsuObjectProperties(
 }
 
 /**
- * Fetch beatmap from api
- * @param  {string} url
- * @param  {string} property
- * @returns {string} property from api object
+ * Shorthand for FetchOsuObjectProperties(identifier, properties, getBeatmap)
+ * @param  {string} identifier can be url or bmid
+ * @param  {string} properties
+ * @returns {string} properties from api object
  */
-function FetchOsuBeatmapProperties(url: string, properties: string) {
-	return FetchOsuObjectProperties(url, properties, getBeatmap);
+function FetchOsuBeatmapProperties(identifier: string, properties: string) {
+	return FetchOsuObjectProperties(identifier, properties, getBeatmap);
 }
 
 /**
- * Fetch beatmap from api
- * @param  {string} url
- * @param  {string} property
- * @returns {string} property from api object
+ * Shorthand for FetchOsuObjectProperties(name, properties, getUser)
+ * @param  {string} name
+ * @param  {string} properties
+ * @returns {string} properties from api object
  */
-function FetchOsuUserProperties(url: string, properties: string) {
-	return FetchOsuObjectProperties(url, properties, getUser);
+function FetchOsuUserProperties(name: string, properties: string) {
+	return FetchOsuObjectProperties(name, properties, getUser);
 }

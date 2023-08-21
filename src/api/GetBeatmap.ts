@@ -1,24 +1,45 @@
+interface BeatmapData {
+	bmid: string;
+	bmsid: string;
+	cacheKey: string;
+}
+
 /**
  * Fetch beatmap (caching applied forever)
- * @param link beatmap link to fetch
+ * @param identifier can be url or bmid
  * @returns js object patched with some custom properties
  */
-function getBeatmap(url: string) {
+function getBeatmap(identifier: any) {
 	const lock = LockService.getDocumentLock()!;
+
+	const data = _resolveBeatmapIdentifier(identifier);
 
 	try {
 		lock.waitLock(300000);
-		return Config.enableCaching
-			? _getBeatmapCached(url)
-			: _getBeatmap(_parseBeatmapUrl(url));
+		return Config.enableCaching ? _getBeatmapCached(data) : _getBeatmap(data);
 	} finally {
 		lock.releaseLock();
 	}
 }
 
-function _parseBeatmapUrl(url: string) {
+function _resolveBeatmapIdentifier(identifier: any) {
+	let data: BeatmapData = {
+		bmid: identifier,
+		bmsid: '',
+		cacheKey: `b/${identifier}`,
+	};
+
+	if (identifier instanceof String) {
+		const parsed = _parseBeatmapUrl(identifier);
+		if (parsed) data = parsed;
+	}
+
+	return data;
+}
+
+function _parseBeatmapUrl(url: any): BeatmapData | undefined {
 	const marr = url.match(/(\d+)/g);
-	if (marr === null || marr?.length < 2) throw 'Not valid url';
+	if (marr === null || marr?.length < 2) return;
 
 	return {
 		bmsid: marr[0],
@@ -27,10 +48,8 @@ function _parseBeatmapUrl(url: string) {
 	};
 }
 
-function _getBeatmapCached(url: string) {
+function _getBeatmapCached(data: BeatmapData) {
 	const cache = CacheService.getDocumentCache()!;
-
-	const data = _parseBeatmapUrl(url);
 
 	let json = cache.get(data.cacheKey);
 	if (json) {
@@ -49,7 +68,7 @@ function _getBeatmapCached(url: string) {
 	return beatmap;
 }
 
-function _getBeatmap(data: {bmid: string; bmsid: string; cacheKey: string}) {
+function _getBeatmap(data: BeatmapData) {
 	const beatmap = jSONArrayRequestGetFirst(
 		applyOpts(
 			Config.baseUrl + '/get_beatmaps',
