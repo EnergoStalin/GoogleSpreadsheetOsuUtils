@@ -24,6 +24,13 @@ class Config {
 		Config.setPropertyOrDeleteIfNull('enableCaching', value ? '1' : '0');
 	}
 
+	static get ignoreCached(): boolean {
+		return (Config.properties.getProperty('ignoreCached') ?? '0') === '1';
+	}
+	static set ignoreCached(value: boolean) {
+		Config.setPropertyOrDeleteIfNull('ignoreCached', value ? '1' : '0');
+	}
+
 	private static setPropertyOrDeleteIfNull(key: string, val: string) {
 		if (val) {
 			Config.properties.setProperty(key, val);

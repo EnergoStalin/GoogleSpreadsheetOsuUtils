@@ -13,6 +13,7 @@ function onOpen() {
 			UI.createMenu('Cache')
 				.addItem('Expiry time', 'setCacheExpiryTime')
 				.addItem('Use cache?', 'setEnableCache')
+				.addItem('Ignore cached?', 'setIgnoreCached')
 		)
 		.addToUi();
 }
@@ -76,8 +77,8 @@ function removeKeyStoringPrompt() {
 function setCacheExpiryTime() {
 	const UI = SpreadsheetApp.getUi();
 	const res = UI.prompt(
-		'Expiry time',
-		'Expiry time in secpnds:',
+		'Cache expiry time',
+		`Expiry time in secpnds. Current value: ${Config.cacheTime}`,
 		UI.ButtonSet.OK_CANCEL
 	);
 
@@ -89,15 +90,22 @@ function setCacheExpiryTime() {
 }
 
 function setEnableCache() {
-	const UI = SpreadsheetApp.getUi();
-	const res = UI.prompt(
-		'Enable cache?',
-		'Ok to enable Cancel to disable',
-		UI.ButtonSet.OK_CANCEL
+	Config.enableCaching = booleanPrompt(
+		'Enable cache? Enable or disable using of cache overall between api and script.'
 	);
-
-	// If cancelled return
-	Config.enableCaching = res.getSelectedButton() === UI.Button.OK;
-
 	Logger.log(`Cache set to ${Config.enableCaching}`);
+}
+
+function setIgnoreCached() {
+	Config.ignoreCached = booleanPrompt(
+		'Ignore cached? Ignores any existing entries overriding with new fetched values.'
+	);
+	Logger.log(`Ignore cached set to ${Config.ignoreCached}`);
+}
+
+function booleanPrompt(text: string) {
+	const UI = SpreadsheetApp.getUi();
+	const res = UI.alert(text, UI.ButtonSet.YES_NO);
+
+	return res === UI.Button.YES;
 }

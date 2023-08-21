@@ -18,17 +18,19 @@ function _getUserCached(name: string) {
 	const cache = CacheService.getDocumentCache()!;
 	const cacheKey = `u/${name}`;
 
-	const json = cache.get(cacheKey);
-	if (json) {
-		const obj = JSON.parse(json);
-		if (obj) {
-			Logger.log(`Got cached result: ${cacheKey}`);
-			return obj;
+	if (!Config.ignoreCached) {
+		const json = cache.get(cacheKey);
+		if (json) {
+			const obj = JSON.parse(json);
+			if (obj) {
+				Logger.log(`Got cached result: ${cacheKey}`);
+				return obj;
+			}
 		}
 	}
 
 	const user = _getUser(name);
-	cache.put(cacheKey, JSON.stringify(user));
+	cache.put(cacheKey, JSON.stringify(user), parseInt(Config.cacheTime));
 
 	return user;
 }
