@@ -7,10 +7,10 @@
 		"build": "tsc",
 		"deploy": "multi-clasp push --force",
 		"buildAndDeploy": "npm run build && npm run deploy",
-		"lint": "gts lint",
+		"lint": "gts lint && eslint src/**.ts",
 		"clean": "gts clean",
 		"compile": "tsc",
-		"fix": "gts fix"
+		"fix": "gts fix && eslint --fix src/**.ts"
 	},
 	"devDependencies": {
 		"@types/node": "^14.11.2",
