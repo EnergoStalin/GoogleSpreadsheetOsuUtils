@@ -22,7 +22,7 @@ Next set api v1 key in Peppy console tab and we're ready to use functions.
 
 > Ps. maybe i need publish this as google workspace app but look at how crazy their approval [flow](https://developers.google.com/static/workspace/marketplace/images/publish-flow-diagram.png). So maybe sometime but definetely not now.
 
-## :flushed: Advantages
+## :flushed: Features
 - Support of most common user and beatmap queries needed
   > If something not present you still can get it by using functions with Property or Properties suffix which extra argument is needed raw json property
 - Configurable caching on document side
