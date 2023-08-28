@@ -1,55 +1,82 @@
 /**
- * Shorthand for FetchOsuUserProperty(name, 'cover_url')
+ * Shorthand for GetOsuUserProperty(name, 'cover_url')
  * @param name
  * @returns avatar url
  */
-function FetchOsuUserProfileImage(name: string) {
-	return FetchOsuUserProperty(name, 'cover_url');
+function GetOsuUserProfileImage(name: string) {
+	return GetOsuUserProperty(name, 'cover_url');
 }
 
 /**
- * Fetch user from api
- * @param name user to fetch
+ * Shorthand for GetOsuUserProperty(name, 'pp_rank')
+ * @param name
+ * @returns avatar url
+ */
+function GetOsuUserPpRank(name: string) {
+	return GetOsuUserProperty(name, 'pp_rank');
+}
+
+/**
+ * Shorthand for GetOsuUserProperty(name, 'pp_country_rank')
+ * @param name
+ * @returns avatar url
+ */
+function GetOsuUserPpCountryRank(name: string) {
+	return GetOsuUserProperty(name, 'pp_country_rank');
+}
+
+/**
+ * Shorthand for GetOsuUserProperty(name, 'country')
+ * @param name
+ * @returns avatar url
+ */
+function GetOsuUserCountry(name: string) {
+	return GetOsuUserProperty(name, 'country');
+}
+
+/**
+ * Get user from api
+ * @param name user to Get
  * @param property property to return
  * @returns user[property]
  */
-function FetchOsuUserProperty(name: string, property: string) {
+function GetOsuUserProperty(name: string, property: string) {
 	return getUser(name)[property];
 }
 
 /**
- * Shorthand for FetchOsuUserProperty(name, 'pp_raw')
- * @param name user to fetch
+ * Shorthand for GetOsuUserProperty(name, 'pp_raw')
+ * @param name user to Get
  * @param property property to return
  * @returns user[property]
  */
-function FetchOsuUserPP(name: string) {
-	return FetchOsuUserProperty(name, 'pp_raw');
+function GetOsuUserPP(name: string) {
+	return GetOsuUserProperty(name, 'pp_raw');
 }
 
 /**
- * Shorthand for FetchOsuBeatmapProperty(identifier, 'cover_url')
+ * Shorthand for GetOsuBeatmapProperty(identifier, 'cover_url')
  * @param  {string} identifier
  */
-function FetchOsuBeatmapCover(identifier: string) {
-	return FetchOsuBeatmapProperty(identifier, 'cover_url');
+function GetOsuBeatmapCover(identifier: string) {
+	return GetOsuBeatmapProperty(identifier, 'cover_url');
 }
 
 /**
- * Shorthand for FetchOsuBeatmapProperty(identifier, 'thumb_url')
+ * Shorthand for GetOsuBeatmapProperty(identifier, 'thumb_url')
  * @param  {string} identifier
  */
-function FetchOsuBeatmapThumb(identifier: string) {
-	return FetchOsuBeatmapProperty(identifier, 'thumb_url');
+function GetOsuBeatmapThumb(identifier: string) {
+	return GetOsuBeatmapProperty(identifier, 'thumb_url');
 }
 
 /**
- * Fetch beatmap from api and return single property from it
+ * Get beatmap from api and return single property from it
  * @param  {string} identifier can be url or bmid
  * @param  {string} property
  * @returns {string} property from api object
  */
-function FetchOsuBeatmapProperty(identifier: string, property: string) {
+function GetOsuBeatmapProperty(identifier: string, property: string) {
 	return getBeatmap(identifier)[property];
 }
 
@@ -59,7 +86,7 @@ function FetchOsuBeatmapProperty(identifier: string, property: string) {
  * @param  {string} properties list of props comma separated
  * @returns {(a: string) => SSO} call prop getter
  */
-function FetchOsuObjectProperties(
+function GetOsuObjectProperties(
 	key: string,
 	properties: string,
 	call: (a: string) => SSO
@@ -76,21 +103,21 @@ function FetchOsuObjectProperties(
 }
 
 /**
- * Shorthand for FetchOsuObjectProperties(identifier, properties, getBeatmap)
+ * Shorthand for GetOsuObjectProperties(identifier, properties, getBeatmap)
  * @param  {string} identifier can be url or bmid
  * @param  {string} properties
  * @returns {string} properties from api object
  */
-function FetchOsuBeatmapProperties(identifier: string, properties: string) {
-	return FetchOsuObjectProperties(identifier, properties, getBeatmap);
+function GetOsuBeatmapProperties(identifier: string, properties: string) {
+	return GetOsuObjectProperties(identifier, properties, getBeatmap);
 }
 
 /**
- * Shorthand for FetchOsuObjectProperties(name, properties, getUser)
+ * Shorthand for GetOsuObjectProperties(name, properties, getUser)
  * @param  {string} name
  * @param  {string} properties
  * @returns {string} properties from api object
  */
-function FetchOsuUserProperties(name: string, properties: string) {
-	return FetchOsuObjectProperties(name, properties, getUser);
+function GetOsuUserProperties(name: string, properties: string) {
+	return GetOsuObjectProperties(name, properties, getUser);
 }
