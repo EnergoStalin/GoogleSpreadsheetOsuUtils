@@ -29,17 +29,7 @@ Next set api v1 key in Peppy console tab and we're ready to use functions.
 - Configurable refresh trigger through checkbox [see](https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils/blob/master/src/utils/refresh.ts)
   > Using like this *=if(RefreshToggle!$A$1=true, FetchOsuUserPP(cell),)*. Then just add custom trigger to refreshToggle function in script trigger section and it should recalculate all formulas writed as mentioned above
 
-## :pencil: Functions 
-- FetchOsuUserProperty
-- FetchOsuUserProfileImage
-- FetchOsuUserPP
-- FetchOsuBeatmapCover
-- FetchOsuBeatmapThumb
-- FetchOsuBeatmapProperty
-- FetchOsuBeatmapProperties
-- FetchOsuUserProperties
-
-> Details [here](https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils/blob/master/src/Bindings.ts)
+## :pencil: [Functions](https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils/blob/master/src/Bindings.ts)
 
 > **Warning**
 > Untested on large amount of data but in theory should perform well
