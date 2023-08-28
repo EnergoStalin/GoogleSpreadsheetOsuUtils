@@ -2,6 +2,8 @@ on:
   push:
     paths:
       - 'src/**'
+      - '.eslint*'
+      - '.prettierrc.js'
 
 concurrency: ci-${{ github.ref }}
 

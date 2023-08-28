@@ -4,13 +4,11 @@
 		"@types/web": "^0.0.67"
 	},
 	"scripts": {
-		"build": "tsc",
-		"deploy": "multi-clasp push --force",
-		"buildAndDeploy": "npm run build && npm run deploy",
 		"lint": "gts lint && eslint src/**.ts",
 		"clean": "gts clean",
-		"compile": "tsc",
-		"fix": "gts fix && eslint --fix src/**.ts"
+		"fix": "gts fix && eslint --fix src/**.ts",
+    "add": "clasp create --parentId",
+    "push": "clasp setting rootDir src && clasp push --force"
 	},
 	"devDependencies": {
 		"@types/node": "^14.11.2",
