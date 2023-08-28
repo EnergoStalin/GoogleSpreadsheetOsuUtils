@@ -30,6 +30,6 @@ Next set api v1 key in Peppy console tab and we're ready to use functions.
   > Using like this *=if(RefreshToggle!$A$1=true, FetchOsuUserPP(cell),)*. Then just add custom trigger to refreshToggle function in script trigger section and it should recalculate all formulas writed as mentioned above
 
 ## :pencil: [Functions](https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils/blob/master/src/Bindings.ts)
-
+## [Example spreadsheet](https://docs.google.com/spreadsheets/d/1HpWxFAGKEV67z1sOfvvDEXcgD4Yxz4XinJBFm4Qa6fQ/edit?usp=sharing)
 > **Warning**
 > Untested on large amount of data but in theory should perform well
