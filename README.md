@@ -1,4 +1,4 @@
-# OsuUtils
+# GoogleSpreadsheetOsuUtils
 [![clasp](https://img.shields.io/badge/built%20with-clasp-4285f4.svg)](https://github.com/google/clasp) ![lint.yml](https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils/actions/workflows/lint.yml/badge.svg)
 
 Adding some osu api functionality to your google spreadsheets.
