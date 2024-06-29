@@ -9,8 +9,8 @@
 		"lint": "gts lint && eslint src/**.ts",
 		"clean": "gts clean",
 		"fix": "gts fix && eslint --fix src/**.ts",
-    "add": "clasp create --parentId",
-    "push": "clasp setting rootDir src && clasp push --force"
+		"add": "node add.mjs",
+		"push": "clasp push --force"
 	},
 	"devDependencies": {
 		"@google/clasp": "^2.4.2",
