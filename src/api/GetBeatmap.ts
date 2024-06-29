@@ -81,9 +81,8 @@ function _getBeatmap(data: BeatmapData) {
 	);
 	if (!beatmap) return;
 
-	beatmap[
-		'cover_url'
-	] = `https://assets.ppy.sh/beatmaps/${beatmap.beatmapset_id}/covers/cover.jpg`;
+	beatmap['cover_url'] =
+		`https://assets.ppy.sh/beatmaps/${beatmap.beatmapset_id}/covers/cover.jpg`;
 	beatmap['thumb_url'] = `https://b.ppy.sh/thumb/${beatmap.beatmapset_id}l.jpg`;
 
 	Logger.log(`Fetched from api: ${data.cacheKey}`);
