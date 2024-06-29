@@ -1,6 +1,5 @@
 class Config {
-	private static readonly properties =
-		PropertiesService.getDocumentProperties();
+	private static readonly properties = PropertiesService.getDocumentProperties();
 	static readonly baseUrl: string = 'https://osu.ppy.sh/api';
 
 	static get apiKey() {

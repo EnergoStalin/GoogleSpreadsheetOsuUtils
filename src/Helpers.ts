@@ -13,9 +13,7 @@ interface SSO {
  */
 function applyOpts(url: string, opts: SSO) {
 	for (const k in opts) {
-		url += `${!url.includes('?') ? '?' : '&'}${k}=${encodeURIComponent(
-			opts[k]
-		)}`;
+		url += `${!url.includes('?') ? '?' : '&'}${k}=${encodeURIComponent(opts[k])}`;
 	}
 	return url;
 }
