@@ -39,8 +39,12 @@ function GetOsuUserCountry(name: string) {
  * @param property property to return
  * @returns user[property]
  */
-function GetOsuUserProperty(name: string, property: string) {
-  return getUser(name)[property];
+function GetOsuUserProperty(
+  name: string | number | undefined,
+  property: string,
+) {
+  const nm = `${name}`;
+  return emptyIfEmpty(nm, () => getUser(nm)[property]);
 }
 
 /**
@@ -72,8 +76,12 @@ function GetOsuBeatmapThumb(identifier: string) {
  * @param identifier can be url or bmid
  * @returns property from api object
  */
-function GetOsuBeatmapProperty(identifier: string, property: string): string {
-  return getBeatmap(identifier)[property];
+function GetOsuBeatmapProperty(
+  identifier: string | number | undefined,
+  property: string,
+): string {
+  const id = `${identifier}`;
+  return emptyIfEmpty(id, () => getBeatmap(id)[property]);
 }
 
 /**
@@ -82,10 +90,14 @@ function GetOsuBeatmapProperty(identifier: string, property: string): string {
  * @returns call prop getter
  */
 function GetOsuObjectProperties(
-  key: string,
-  properties: string,
+  key: string | undefined,
+  properties: string | undefined,
   call: (a: string) => SSO,
 ) {
+  if (!key || !properties || key?.length + properties?.length === 0) {
+    return '';
+  }
+
   const bm = call(key);
   const props = properties.split(',');
 

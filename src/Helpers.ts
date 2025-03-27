@@ -72,3 +72,8 @@ function getDocumentCache() {
 
   return cache;
 }
+
+function emptyIfEmpty(key: string | undefined | null, fn: () => string) {
+  if (!key || !key.length) return '';
+  return fn();
+}
