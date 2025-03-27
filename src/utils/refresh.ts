@@ -1,8 +1,14 @@
 function refreshToggle() {
-	const ss = SpreadsheetApp.getActiveSpreadsheet();
-	const range = ss.getSheetByName('RefreshToggle')!.getRange('A1:A1');
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const range = ss.getSheetByName('RefreshToggle');
+  if (!range) {
+    Logger.log('No sheet with name RefreshToggle found');
+    return;
+  }
 
-	range.setValue(false);
-	SpreadsheetApp.flush();
-	range.setValue(true);
+  const cell = range.getRange('A1:A1');
+
+  cell.setValue(false);
+  SpreadsheetApp.flush();
+  cell.setValue(true);
 }

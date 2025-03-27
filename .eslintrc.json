@@ -1,9 +1,8 @@
 {
-	"extends": "./node_modules/gts/",
-	"rules": {
-		"indent": "off",
-		"@typescript-eslint/no-unused-vars": "off",
-		"@typescript-eslint/no-explicit-any": "off",
-		"@typescript-eslint/indent": "off"
-	}
+  "extends": "./node_modules/gts/",
+  "rules": {
+    "@typescript-eslint/no-namespace": 0,
+    "@typescript-eslint/no-unused-vars": 0,
+    "no-inner-declarations": 0
+  }
 }

@@ -1,40 +1,50 @@
-class Config {
-	private static readonly properties = PropertiesService.getDocumentProperties();
-	static readonly baseUrl: string = 'https://osu.ppy.sh/api';
+namespace Config {
+  const properties = PropertiesService.getDocumentProperties();
+  export const baseUrl = 'https://osu.ppy.sh/api';
 
-	static get apiKey() {
-		return Config.properties.getProperty('APIv1 key') ?? '';
-	}
-	static set apiKey(value: string) {
-		Config.setPropertyOrDeleteIfNull('APIv1 key', value);
-	}
+  export function getApiKey(): string {
+    return properties.getProperty('APIv1 key') ?? '';
+  }
+  export function setApiKey(value: string): void {
+    setPropertyOrDeleteIfNull('APIv1 key', value);
+  }
 
-	static get cacheTime() {
-		return Config.properties.getProperty('cacheTime') ?? '1800';
-	}
-	static set cacheTime(value: string) {
-		Config.setPropertyOrDeleteIfNull('cacheTime', value);
-	}
+  export function getGameMode(): string {
+    return properties.getProperty('gameMode') ?? '0';
+  }
+  /**
+   * @param {string} value (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania)
+   */
+  export function setGameMode(value: string): void {
+    setPropertyOrDeleteIfNull('gameMode', value);
+  }
 
-	static get enableCaching(): boolean {
-		return (Config.properties.getProperty('enableCaching') ?? '0') === '1';
-	}
-	static set enableCaching(value: boolean) {
-		Config.setPropertyOrDeleteIfNull('enableCaching', value ? '1' : '0');
-	}
+  export function getCacheTime(): string {
+    return properties.getProperty('cacheTime') ?? '1800';
+  }
+  export function setCacheTime(value: string): void {
+    setPropertyOrDeleteIfNull('cacheTime', value);
+  }
 
-	static get ignoreCached(): boolean {
-		return (Config.properties.getProperty('ignoreCached') ?? '0') === '1';
-	}
-	static set ignoreCached(value: boolean) {
-		Config.setPropertyOrDeleteIfNull('ignoreCached', value ? '1' : '0');
-	}
+  export function isCachingEnabled(): boolean {
+    return (properties.getProperty('enableCaching') ?? '0') === '1';
+  }
+  export function setCachingEnabled(value: boolean): void {
+    setPropertyOrDeleteIfNull('enableCaching', value ? '1' : '0');
+  }
 
-	private static setPropertyOrDeleteIfNull(key: string, val: string) {
-		if (val) {
-			Config.properties.setProperty(key, val);
-		} else {
-			Config.properties.deleteProperty(key);
-		}
-	}
+  export function shouldIgnoreCached(): boolean {
+    return (properties.getProperty('ignoreCached') ?? '0') === '1';
+  }
+  export function setIgnoreCached(value: boolean): void {
+    setPropertyOrDeleteIfNull('ignoreCached', value ? '1' : '0');
+  }
+
+  function setPropertyOrDeleteIfNull(key: string, val: string): void {
+    if (val) {
+      properties.setProperty(key, val);
+    } else {
+      properties.deleteProperty(key);
+    }
+  }
 }

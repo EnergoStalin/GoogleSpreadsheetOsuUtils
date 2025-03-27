@@ -1,11 +1,7 @@
-import {execSync} from 'child_process';
-import pkg from './package.json' with { type: 'json' };
-import path from 'path';
-import {renameSync} from 'fs';
+import { execSync } from 'node:child_process';
+import pkg from './package.json' assert { type: 'json' };
 
 execSync(
-	`npx clasp create --title '${pkg.name}' --rootDir src --parentId ${process.argv.pop()}`,
-	{stdio: 'inherit'}
+	`npx clasp create --title '${pkg.name}' --rootDir build/src --parentId ${process.argv.pop()}`,
+	{ stdio: 'inherit' },
 );
-
-renameSync(path.join('src', '.clasp.json'), '.clasp.json');

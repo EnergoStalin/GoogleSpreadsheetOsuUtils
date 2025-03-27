@@ -1,4 +1,3 @@
 module.exports = {
-  ...require('gts/.prettierrc.json'),
-  "useTabs": true
+  ...require('gts/.prettierrc.json')
 }

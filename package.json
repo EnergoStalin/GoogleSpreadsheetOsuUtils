@@ -1,22 +1,23 @@
 {
-	"name": "GoogleSpreadsheetOsuUtils",
-	"version": "1.0.0",
-	"dependencies": {
-		"@types/google-apps-script": "^1.0.83",
-		"@types/web": "^0.0.67"
-	},
-	"scripts": {
-		"lint": "gts lint && eslint src/**.ts",
-		"clean": "gts clean",
-		"fix": "gts fix && eslint --fix src/**.ts",
-		"add": "node add.mjs",
-		"push": "clasp push --force"
-	},
-	"devDependencies": {
-		"@google/clasp": "^2.4.2",
-		"@types/node": "^20.14.9",
-		"gts": "^5.3.1",
-		"multi-clasp2": "^3.0.19",
-		"typescript": "^5.5.2"
-	}
+  "name": "GoogleSpreadsheetOsuUtils",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "fix": "gts fix",
+    "add": "node add.mjs",
+    "compile": "tsc",
+    "prepare": "pnpm run compile",
+    "pretest": "pnpm run compile",
+    "posttest": "pnpm run lint"
+  },
+  "devDependencies": {
+    "@google/clasp": "3.0.3-alpha",
+    "@types/google-apps-script": "^1.0.97",
+    "@types/node": "^22.7.5",
+    "gts": "^6.0.2",
+    "import": "^0.0.6",
+    "multi-clasp2": "^3.0.21",
+    "typescript": "^5.1.6"
+  }
 }
