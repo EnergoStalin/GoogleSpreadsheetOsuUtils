@@ -29,9 +29,10 @@ function renderGameModeMenu() {
   const len = modes.length;
   for (let i = 0; i < len; i++) {
     let mode = modes[i];
+    const handler = `set${mode}Mode`;
     if (i === selectedMode) mode = `${mode} *`;
 
-    menu.addItem(mode, `set${mode}Mode`);
+    menu.addItem(mode, handler);
   }
 
   return menu;
