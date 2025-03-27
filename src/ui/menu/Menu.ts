@@ -7,7 +7,20 @@ function onOpen() {
     .addSubMenu(
       UI.createMenu('osu!API Management')
         .addItem('Set API key', 'showKeyStoringPrompt')
-        .addSubMenu(renderGameModeMenu())
+        .addSubMenu(
+          renderGameModeMenu(
+            'Global Game Mode',
+            'Global',
+            Config.getGameModeGlobal,
+          ),
+        )
+        .addSubMenu(
+          renderGameModeMenu(
+            'Selected Sheet Game Mode',
+            'Scoped',
+            Config.getGameModeScoped,
+          ),
+        )
         .addItem('Remove API key', 'removeKeyStoringPrompt'),
     )
     .addSubMenu(
@@ -19,17 +32,21 @@ function onOpen() {
     .addToUi();
 }
 
-function renderGameModeMenu() {
+function renderGameModeMenu(
+  title: string,
+  suffix: string,
+  getter: () => string | null,
+) {
   const UI = SpreadsheetApp.getUi();
-  const menu = UI.createMenu('Game Mode');
+  const menu = UI.createMenu(title);
   const modes = ['STD', 'Taiko', 'CTB', 'Mania'];
 
-  const selectedMode = Number.parseInt(Config.getGameMode(), 10);
+  const selectedMode = Number.parseInt(getter() ?? '0', 10);
 
   const len = modes.length;
   for (let i = 0; i < len; i++) {
     let mode = modes[i];
-    const handler = `set${mode}Mode`;
+    const handler = `set${mode}Mode${suffix}`;
     if (i === selectedMode) mode = `${mode} *`;
 
     menu.addItem(mode, handler);
@@ -38,17 +55,30 @@ function renderGameModeMenu() {
   return menu;
 }
 
-function setSTDMode() {
-  Config.setGameMode('0');
+function setSTDModeGlobal() {
+  Config.setGameModeGlobal('0');
 }
-function setTaikoMode() {
-  Config.setGameMode('1');
+function setTaikoModeGlobal() {
+  Config.setGameModeGlobal('1');
 }
-function setCTBMode() {
-  Config.setGameMode('2');
+function setCTBModeGlobal() {
+  Config.setGameModeGlobal('2');
 }
-function setManiaMode() {
-  Config.setGameMode('3');
+function setManiaModeGlobal() {
+  Config.setGameModeGlobal('3');
+}
+
+function setSTDModeScoped() {
+  Config.setGameModeScoped('0');
+}
+function setTaikoModeScoped() {
+  Config.setGameModeScoped('1');
+}
+function setCTBModeScoped() {
+  Config.setGameModeScoped('2');
+}
+function setManiaModeScoped() {
+  Config.setGameModeScoped('3');
 }
 
 /**

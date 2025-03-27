@@ -9,14 +9,25 @@ namespace Config {
     setPropertyOrDeleteIfNull('APIv1 key', value);
   }
 
+  export function getGameModeGlobal(): string | null {
+    return properties.getProperty('gameMode');
+  }
+  export function getGameModeScoped(): string | null {
+    const id = SpreadsheetApp.getActiveSheet().getSheetId();
+    return properties.getProperty(`gameMode/${id}`);
+  }
   export function getGameMode(): string {
-    return properties.getProperty('gameMode') ?? '0';
+    return getGameModeScoped() ?? getGameModeGlobal() ?? '0';
   }
   /**
    * @param {string} value (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania)
    */
-  export function setGameMode(value: string): void {
+  export function setGameModeGlobal(value: string): void {
     setPropertyOrDeleteIfNull('gameMode', value);
+  }
+  export function setGameModeScoped(value: string): void {
+    const id = SpreadsheetApp.getActiveSheet().getSheetId();
+    setPropertyOrDeleteIfNull(`gameMode/${id}`, value);
   }
 
   export function getCacheTime(): string {
