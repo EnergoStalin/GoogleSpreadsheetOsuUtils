@@ -8,12 +8,15 @@ Adding some osu api functionality to your google spreadsheets.
 Install nodejs preferrably using [volta](https://docs.volta.sh/guide/getting-started) and [pnpm](https://pnpm.io/installation).
 
 Run this in terminal after replacing values in <>
-```
-git clone --depth 1 https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils.git && cd GoogleSpreadsheetOsuUtils
-pnpm i
+```sh
+set -e
+
+git clone --depth 1 https://github.com/EnergoStalin/GoogleSpreadsheetOsuUtils.git
+cd GoogleSpreadsheetOsuUtils
+pnpm install
 pnpm exec clasp login
-pnpm run add <your spreadsheetId>
-pnpm run push
+pnpm run add <your spreadsheet id>
+pnpm exec clasp push --force
 ```
 
 Reload page and inside extensions navbar should appear GoogleSpreadsheetOsuUtils.
