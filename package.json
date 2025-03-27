@@ -6,7 +6,7 @@
     "clean": "gts clean",
     "fix": "gts fix",
     "add": "node add.mjs",
-    "compile": "tsc",
+    "compile": "tsc && cp src/appsscript.json build/src/appsscript.json",
     "prepare": "pnpm run compile",
     "pretest": "pnpm run compile",
     "posttest": "pnpm run lint"
