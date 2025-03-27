@@ -1,10 +1,10 @@
-local overseer = require('overseer')
+local overseer = require("overseer")
 
 overseer.register_template({
-  name = 'dev',
+  name = "dev",
   builder = function()
     return {
-      name = 'dev',
+      name = "dev",
       strategy = {
         "orchestrator",
         tasks = {
